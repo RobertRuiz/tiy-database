@@ -67,7 +67,7 @@ class Menu
     person.github = gets.chomp
 
     @peeps << person
-
+    p @peeps
     puts "#{@peeps[-1].name} has been added, thank you"
   end
 
@@ -98,8 +98,9 @@ class Menu
 
     for person in @peeps
       if person.name == delete_person
-        peeps.delete(delete_person)
+        @peeps.delete(person)
         puts "86 them now"
+        p @peeps
         return
       else
         puts "Unable to find #{delete_person}, they may be M.I.A."
