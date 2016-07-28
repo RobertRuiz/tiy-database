@@ -2,63 +2,46 @@ class Peeps
   attr_accessor :name, :phone, :address, :position , :salary, :slack, :github
 
   def initialize(name, phone, address, position, salary, slack, github)
+    @peeps = []
   end
 end
 
 class Menu
-  def initialize
-    @peeps = []
-end
+  attr_accessor :A, :S, :D, :C
 
-def prompt
+  def initialize(A, S, D, C)
+    @prompt = []
+
+loop do
   puts "Please Select the corresponding letter (A, S or D) as follows:
-    {
-      A: Add a person
-      S: Search for a person
-      D: Delete a person
-    }"
-  chosen = gets.chomp
-  if chosen == "D"
-    break
-  end
-end
-
-# case chosen
-# when A
-#   add_person
-# when S
-#   search_person
-# when D
-#   delete_person
-# when C
-#   cancel_search
-# else
-#   puts "Please only select A, S, or D"
-# end
-
   def prompt
-    loop do
-    puts "A: Add a person"
-    puts "S: Search for a person"
-    puts "D: Delete a person"
-    puts "C: Cancel"
-    picked = gets.chomp
-
-    if picked == "A"
+      {
+        A: Add a person
+        S: Search for a person
+        D: Delete a person
+        C: Cancel search
+      }"
+  chosen = gets.chomp
+  case chosen
+    when A
       puts "Please provide first and last name"
-      Add_person
-    elsif picked == "S"
+      add_person
+    when S
       puts "Please provide first and last name"
-      Search_person
-    elsif picked == "D"
-      puts "Please provide first and last name"
-      Delete_person
-    elsif picked == "C"
+      search_person
+    when D
+      delete_person
+      puts "Deleting them now"
+    when C
+      cancel_search
+      exit
+    else
+      puts "Please only select A, S, or D"
     end
   end
+end
 
-def method_name
-  add_person
+def add_person
 person = Peeps.new
 @peeps << person
 person << %w([name] phone address position salary slack github)
@@ -80,7 +63,7 @@ def search_person
           #{person.github}"
     return
   else
-    puts "Unable to find #{search_person}, they maybe M.I.A."
+    puts "Unable to find #{search_person}, they may be M.I.A."
   end
 end
 
@@ -89,7 +72,6 @@ def delete_person
 end
 
 def cancel_search
-  puts "Thank you and have a great day"
   exit
 end
 
