@@ -1,78 +1,105 @@
-class Peeps
+class Peeps # this class seems to be working
   attr_accessor :name, :phone, :address, :position , :salary, :slack, :github
 
-  def initialize(name, phone, address, position, salary, slack, github)
-    @peeps = []
+  def initialize(name)
+    @name = name
   end
 end
+
+@peeps = []
 
 class Menu
-  attr_accessor :A, :S, :D, :C
-
-  def initialize(A, S, D, C)
-    @prompt = []
-
-loop do
-  puts "Please Select the corresponding letter (A, S or D) as follows:
   def prompt
-      {
-        A: Add a person
-        S: Search for a person
-        D: Delete a person
-        C: Cancel search
-      }"
-  chosen = gets.chomp
-  case chosen
-    when A
-      puts "Please provide first and last name"
-      add_person
-    when S
-      puts "Please provide first and last name"
-      search_person
-    when D
-      delete_person
-      puts "Deleting them now"
-    when C
-      cancel_search
-      exit
-    else
-      puts "Please only select A, S, or D"
+    loop do
+      puts "Please Select the corresponding letter (A, S or D) as follows:"
+
+      puts "A: Add a person"
+      puts "S: Search for a person"
+      puts "D: Delete a person"
+      puts "C: Cancel search"
+
+      chosen = gets.chomp
+
+      case chosen
+      when "A"
+        puts "Please provide name"
+        add_person
+      when "S"
+        puts "Please provide name"
+        search_person
+      when "D"
+        puts "Please provide name"
+        delete_person
+      when "C"
+        cancel_search
+        exit
+      else
+        puts "Please only select A, S, or D"
+      end
     end
   end
-end
 
-def add_person
-person = Peeps.new
-@peeps << person
-person << %w([name] phone address position salary slack github)
-end
+  PREFIX = "Dear human please provide the "
 
-def search_person
-  puts "Who are you looking for "
-  search_person = gets.chomp!
+  def add_person
+    puts "#{PREFIX} name"
+    name = gets.chomp
 
-  for person in @peeps
-  if person.name == search_person
-    puts "That is:
-          #{person.name}
-          #{person.phone}
-          #{person.address}
-          #{person.position}
-          #{person.salary}
-          #{person.slack}
-          #{person.github}"
-    return
-  else
-    puts "Unable to find #{search_person}, they may be M.I.A."
+    person = Peeps.new(name)
+
+    puts "#{PREFIX} phone"
+    person.phone = gets.chomp
+
+    puts "#{PREFIX} address"
+    person.address = gets.chomp
+
+    puts "#{PREFIX} position"
+    person.position = gets.chomp
+
+    puts "#{PREFIX} salary"
+    person.salary = gets.chomp
+
+    puts "#{PREFIX} slack"
+    person.slack = gets.chomp
+
+    puts "#{PREFIX} github"
+    person.github = gets.chomp
+
+    @peeps << person
   end
-end
 
-def delete_person
-  delete_person = gets.chomp
-end
+  def search_person
+    puts "Who are you looking for "
+    search_person = gets.chomp!
 
-def cancel_search
-  exit
+    for person in @peeps
+      if person.name == search_person
+        puts "That is:
+              #{person.name}
+              #{person.phone}
+              #{person.address}
+              #{person.position}
+              #{person.salary}
+              #{person.slack}
+              #{person.github}"
+        return
+      else
+        puts "Unable to find #{search_person}, they may be M.I.A."
+      end
+    end
+  end
+
+  def delete_person
+    if chosen = "D" && name=gets.chomp
+    peeps.delete(person)
+    else
+      puts "Unable to find #{search_person}, they may be M.I.A."
+    end
+  end
+
+  def cancel_search # This one works
+    exit
+  end
 end
 
 menu = Menu.new
