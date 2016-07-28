@@ -1,4 +1,4 @@
-class Peeps # this class seems to be working
+class Peeps
   attr_accessor :name, :phone, :address, :position , :salary, :slack, :github
 
   def initialize(name)
@@ -6,9 +6,11 @@ class Peeps # this class seems to be working
   end
 end
 
-@peeps = []
-
 class Menu
+  def initialize
+    @peeps = []
+  end
+
   def prompt
     loop do
       puts "Please Select the corresponding letter (A, S or D) as follows:"
@@ -22,7 +24,6 @@ class Menu
 
       case chosen
       when "A"
-        puts "Please provide name"
         add_person
       when "S"
         puts "Please provide name"
@@ -39,7 +40,7 @@ class Menu
     end
   end
 
-  PREFIX = "Dear human please provide the "
+  PREFIX = "Dear humanoid please provide the"
 
   def add_person
     puts "#{PREFIX} name"
@@ -66,11 +67,13 @@ class Menu
     person.github = gets.chomp
 
     @peeps << person
+
+    puts "#{@peeps[-1].name} has been added, thank you"
   end
 
   def search_person
-    puts "Who are you looking for "
-    search_person = gets.chomp!
+    puts "Who are you looking for ?"
+    search_person = gets.chomp
 
     for person in @peeps
       if person.name == search_person
@@ -90,14 +93,22 @@ class Menu
   end
 
   def delete_person
-    if chosen = "D" && name=gets.chomp
-    peeps.delete(person)
-    else
-      puts "Unable to find #{search_person}, they may be M.I.A."
+    puts "Who would you like to delete?"
+    delete_person = gets.chomp
+
+    for person in @peeps
+      if person.name == delete_person
+        peeps.delete(delete_person)
+        puts "86 them now"
+        return
+      else
+        puts "Unable to find #{delete_person}, they may be M.I.A."
+      end
     end
   end
 
   def cancel_search # This one works
+    puts "Hope you had fun, come back REAL soon you hear"
     exit
   end
 end
