@@ -26,7 +26,7 @@ class Menu
       when "A"
         add_person
       when "S"
-        puts "Please provide name"
+        # puts "Please provide name"
         search_person
       when "D"
         puts "Please provide name"
@@ -67,7 +67,6 @@ class Menu
     person.github = gets.chomp
 
     @peeps << person
-    p @peeps
     puts "#{@peeps[-1].name} has been added, thank you"
   end
 
@@ -87,7 +86,8 @@ class Menu
               #{person.github}"
         return
       else
-        puts "Unable to find #{search_person}, they may be M.I.A."
+        puts "Unable to find #{search_person}, they are officially M.I.A."
+        exit
       end
     end
   end
@@ -100,7 +100,6 @@ class Menu
       if person.name == delete_person
         @peeps.delete(person)
         puts "86 them now"
-        p @peeps
         return
       else
         puts "Unable to find #{delete_person}, they may be M.I.A."
